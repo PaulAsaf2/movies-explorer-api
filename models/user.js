@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
+const { model } = mongoose;
 
 const userSchema = new Schema({
   name: {
@@ -20,6 +21,7 @@ const userSchema = new Schema({
     required: true,
     select: false,
   },
-});
+}, { versionKey: false });
 
-export default userSchema;
+const User = model('user', userSchema);
+export default User;

@@ -2,6 +2,7 @@
 import mongoose from 'mongoose';
 
 const { Schema } = mongoose;
+const { model } = mongoose;
 const { ObjectId } = mongoose.Schema.Types;
 
 const movieSchema = new Schema({
@@ -60,9 +61,10 @@ const movieSchema = new Schema({
     required: true,
     // match: [checkRU, 'Название содержит нелатинские символы'],
   },
-});
+}, { versionKey: false });
 
-export default movieSchema;
+const Movie = model('movie', movieSchema);
+export default Movie;
 
 // country — страна создания фильма. Обязательное поле-строка.
 // director — режиссёр фильма. Обязательное поле-строка.

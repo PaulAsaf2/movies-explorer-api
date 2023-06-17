@@ -1,5 +1,17 @@
 /* eslint-disable max-len */
 /* eslint-disable linebreak-style */
+const express = require('express');
+const userRoutes = require('./users');
+const movieRoutes = require('./movies');
+const authRoutes = require('./auth');
+
+const router = express.Router();
+
+router.use('/', authRoutes);
+router.use('/users', userRoutes);
+router.use('/movies', movieRoutes);
+
+module.exports = router;
 
 /*
 Создайте роуты и контроллеры

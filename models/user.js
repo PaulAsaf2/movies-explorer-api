@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { checkEmail } = require('../config');
 
 const { Schema } = mongoose;
 const { model } = mongoose;
@@ -14,7 +15,7 @@ const userSchema = new Schema({
     type: String,
     required: true,
     unique: true,
-    // match: [checkEmail, 'Некорректный адрес электронной почты'],
+    match: checkEmail,
   },
   password: {
     type: String,

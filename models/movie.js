@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 const { model } = mongoose;
@@ -63,8 +63,7 @@ const movieSchema = new Schema({
   },
 }, { versionKey: false });
 
-const Movie = model('movie', movieSchema);
-export default Movie;
+module.exports = model('movie', movieSchema);
 
 // country — страна создания фильма. Обязательное поле-строка.
 // director — режиссёр фильма. Обязательное поле-строка.

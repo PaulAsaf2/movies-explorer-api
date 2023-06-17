@@ -1,7 +1,6 @@
 {
   "name": "movies-explorer-api",
   "version": "1.0.0",
-  "type": "module",
   "description": "Diploma thesis",
   "main": "index.js",
   "scripts": {

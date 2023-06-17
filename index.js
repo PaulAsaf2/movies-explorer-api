@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
-import express from 'express';
-import mongoose from 'mongoose';
+const express = require('express');
+const mongoose = require('mongoose');
 
 const { PORT = 3000 } = process.env;
 const app = express();

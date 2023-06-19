@@ -15,3 +15,10 @@ exports.signinValidation = celebrate({
     password: Joi.string().required(),
   }),
 });
+
+exports.updateUserValidation = celebrate({
+  body: Joi.object().keys({
+    name: Joi.string().required().min(2).max(30),
+    email: Joi.string().required().email(),
+  }),
+});

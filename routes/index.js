@@ -4,12 +4,13 @@ const express = require('express');
 const userRoutes = require('./users');
 const movieRoutes = require('./movies');
 const authRoutes = require('./auth');
+const { auth } = require('../middlewares/auth');
 
 const router = express.Router();
 
 router.use('/', authRoutes);
-router.use('/users', userRoutes);
-router.use('/movies', movieRoutes);
+router.use('/users', auth, userRoutes);
+router.use('/movies', auth, movieRoutes);
 
 module.exports = router;
 
@@ -61,9 +62,4 @@ POST /signin возвращает JWT, если в теле запроса пе�
 и пароль.
 Если вы сохраняете JWT в куках, роут /signout должен удалять JWT из куки.
 -------------------------------------------------
-Пользователь не может удалить сохранённую карточку из профиля другого
-пользователя. / 3.64
-Все роуты, кроме /signin и /signup, защищены авторизацией. / 3.64
-Роуты пользователей и роуты фильмов описаны в отдельных файлах. / 3.64
-
 */

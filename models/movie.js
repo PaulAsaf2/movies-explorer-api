@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 const mongoose = require('mongoose');
+const { checkURL } = require('../config');
 
 const { Schema } = mongoose;
 const { model } = mongoose;
@@ -29,17 +30,17 @@ const movieSchema = new Schema({
   image: {
     type: String,
     required: true,
-    // match: [checkURL, 'Некорректная ссылка'],
+    match: [checkURL],
   },
   trailerLink: {
     type: String,
     required: true,
-    // match: [checkURL, 'Некорректная ссылка'],
+    match: [checkURL],
   },
   thumbnail: {
     type: String,
     required: true,
-    // match: [checkURL, 'Некорректная ссылка'],
+    match: [checkURL],
   },
   owner: {
     type: ObjectId,
@@ -54,12 +55,10 @@ const movieSchema = new Schema({
   nameRU: {
     type: String,
     required: true,
-    // match: [checkRU, 'Название содержит некирилличиские символы'],
   },
   nameEN: {
     type: String,
     required: true,
-    // match: [checkRU, 'Название содержит нелатинские символы'],
   },
 }, { versionKey: false });
 

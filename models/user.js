@@ -20,6 +20,7 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: true,
+    minlength: 2,
     select: false,
   },
 }, { versionKey: false });

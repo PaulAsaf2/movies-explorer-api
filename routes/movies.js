@@ -1,13 +1,11 @@
 const express = require('express');
+const { createMovie, getMovies } = require('../controllers/movies');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  res.send();
-});
-router.post('/', (req, res) => {
-  res.send();
-});
+router.get('/', getMovies);
+router.post('/', createMovie);
+
 router.delete('/:id', (req, res) => {
   res.send();
 });

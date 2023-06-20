@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 const mongoose = require('mongoose');
-const { checkURL } = require('../config');
+const { checkURL, checkRU } = require('../config');
 
 const { Schema } = mongoose;
 const { model } = mongoose;
@@ -48,13 +48,13 @@ const movieSchema = new Schema({
     required: true,
   },
   movieId: {
-    type: ObjectId,
-    ref: 'film',
+    type: Number,
     required: true,
   },
   nameRU: {
     type: String,
     required: true,
+    match: [checkRU],
   },
   nameEN: {
     type: String,

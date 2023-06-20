@@ -10,6 +10,7 @@ const cookieParser = require('cookie-parser');
 // Import modules
 const indexRoute = require('./routes/index');
 const handleErrors = require('./errors/handleErrors');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3001 } = process.env;
 const app = express();
@@ -18,11 +19,13 @@ app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
 });
 
+app.use(requestLogger);
 app.use(express.json());
 app.use(cookieParser());
 
 app.use(indexRoute);
 
 // handle errors
+app.use(errorLogger);
 app.use(errors());
 app.use(handleErrors);

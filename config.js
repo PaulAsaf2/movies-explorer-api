@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 exports.INCORRECT_DATA = 400;
 exports.UNAUTHORIZED = 401;
 exports.FORBIDDEN = 403;

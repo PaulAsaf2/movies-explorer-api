@@ -1,10 +1,14 @@
 /* eslint-disable max-len */
 const Movie = require('../models/movie');
+const NotFoundError = require('../errors/notFound');
+const Forbidden = require('../errors/forbidden');
 
 const getMovies = async (req, res, next) => {
   let movies;
   try {
-    movies = await Movie.find({});
+    movies = await Movie
+      .find({})
+      .populate('owner');
   } catch (err) {
     return next(err);
   }
@@ -52,9 +56,24 @@ const createMovie = async (req, res, next) => {
   return res.json(newMovie);
 };
 
+const deleteMovie = async (req, res, next) => {
+  try {
+    const movie = await Movie
+      .findById(req.params.id)
+      .orFail(new NotFoundError('Карточка не найдена'));
+    if (movie.owner.toString() !== req.user._id) {
+      return next(new Forbidden('Нельзя удалить из избранного чужой фильм'));
+    }
+    movie.deleteOne();
+  } catch (err) { return next(err); }
+
+  return res.json({ message: 'Фильм удалён из избранного' });
+};
+
 module.exports = {
   createMovie,
   getMovies,
+  deleteMovie,
 };
 
 // # создаёт фильм с переданными в теле

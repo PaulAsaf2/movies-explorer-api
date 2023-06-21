@@ -1,6 +1,9 @@
+const { emailExistError } = require('../config');
+const { CONFLICT } = require('../config');
+
 const handleError = ((err, req, res, next) => {
   if (err.code === 11000) {
-    res.json({ message: 'Электронная почта занята' });
+    res.status(CONFLICT).json({ message: emailExistError });
   } else if (err.statusCode) {
     return res.status(err.statusCode).send({ message: err.message });
   }

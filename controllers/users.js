@@ -1,3 +1,4 @@
+require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
@@ -13,6 +14,7 @@ const {
   successfulExit,
   userNotFound,
   registrationError,
+  updateUserError,
 } = require('../config');
 // ----------------------------------------------------
 const createUser = async (req, res, next) => {
@@ -93,6 +95,9 @@ const updateUser = async (req, res, next) => {
       },
     );
   } catch (err) {
+    if (err instanceof ValidationError) {
+      return next(new BadRequest(updateUserError));
+    }
     return next(err);
   }
   return res.json(updatedUser);

@@ -75,10 +75,3 @@ module.exports = {
   getMovies,
   deleteMovie,
 };
-
-// # создаёт фильм с переданными в теле
-// # country, director, duration, year, description, image, trailer, nameRU,
-// nameEN и thumbnail, movieId
-// POST /movies
-
-// country, director, duration, year, description, image, trailer, nameRU, nameEN и thumbnail, movieId

@@ -16,7 +16,7 @@ const {
   registrationError,
   updateUserError,
   developmentKey,
-} = require('../utils/constants');
+} = require('../utils/config');
 // ----------------------------------------------------
 const createUser = async (req, res, next) => {
   const { name, email, password } = req.body;

@@ -4,7 +4,7 @@ const userRoutes = require('./users');
 const movieRoutes = require('./movies');
 const authRoutes = require('./auth');
 const { auth } = require('../middlewares/auth');
-const { pageNotFound } = require('../config');
+const { pageNotFound } = require('../utils/config');
 
 const router = express.Router();
 

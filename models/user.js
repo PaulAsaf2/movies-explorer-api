@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { checkEmail } = require('../config');
+const { checkEmail } = require('../utils/config');
 
 const { Schema } = mongoose;
 const { model } = mongoose;

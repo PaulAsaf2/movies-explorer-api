@@ -1,7 +1,7 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-
+// ----------------------------------------------------
 const { NODE_ENV, JWT_SECRET } = process.env;
 const { ValidationError } = require('mongoose').Error;
 const User = require('../models/user');
@@ -15,7 +15,8 @@ const {
   userNotFound,
   registrationError,
   updateUserError,
-} = require('../config');
+  developmentKey,
+} = require('../utils/config');
 // ----------------------------------------------------
 const createUser = async (req, res, next) => {
   const { name, email, password } = req.body;
@@ -52,7 +53,7 @@ const signin = async (req, res, next) => {
 
     token = await jwt.sign(
       { _id: existUser._id },
-      NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
+      NODE_ENV === 'production' ? JWT_SECRET : developmentKey,
       { expiresIn: '7d' },
     );
   } catch (err) { return next(err); }
@@ -82,6 +83,7 @@ const getUser = async (req, res) => {
 const updateUser = async (req, res, next) => {
   const { name, email } = req.body;
   let updatedUser;
+
   try {
     updatedUser = await User.findByIdAndUpdate(
       req.user._id,
@@ -100,9 +102,10 @@ const updateUser = async (req, res, next) => {
     }
     return next(err);
   }
+
   return res.json(updatedUser);
 };
-
+// ----------------------------------------------------
 module.exports = {
   createUser,
   signin,

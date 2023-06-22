@@ -1,5 +1,5 @@
 const { celebrate, Joi } = require('celebrate');
-// const { checkURL } = require('../config');
+const { checkURL } = require('../utils/config');
 
 exports.signupValidation = celebrate({
   body: Joi.object().keys({
@@ -16,9 +16,18 @@ exports.signinValidation = celebrate({
   }),
 });
 
-exports.updateUserValidation = celebrate({
+exports.createMovieValidation = celebrate({
   body: Joi.object().keys({
-    name: Joi.string().required().min(2).max(30),
-    email: Joi.string().required().email(),
+    country: Joi.string().required(),
+    director: Joi.string().required(),
+    duration: Joi.number().required(),
+    year: Joi.number().required(),
+    description: Joi.string().required(),
+    image: Joi.string().pattern(checkURL).required(),
+    trailerLink: Joi.string().pattern(checkURL).required(),
+    thumbnail: Joi.string().pattern(checkURL).required(),
+    movieId: Joi.number().required(),
+    nameRU: Joi.string().required(),
+    nameEN: Joi.string().required(),
   }),
 });

@@ -88,7 +88,7 @@ const deleteMovie = async (req, res, next) => {
       return next(new Forbidden(movieDeletionError));
     }
 
-    movie.deleteOne();
+    await movie.deleteOne();
   } catch (err) {
     if (err instanceof CastError) {
       return next(new BadRequest(incorrectIdFilm));

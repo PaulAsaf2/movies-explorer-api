@@ -14,12 +14,16 @@ const {
 // ----------------------------------------------------
 const getMovies = async (req, res, next) => {
   try {
-    const movies = await Movie
+    const allMovies = await Movie
       .find({})
-      .orFail(new NotFoundError(notFoundFilmes))
       .populate('owner');
 
-    return res.json(movies);
+    const userMovies = await allMovies
+      .filter((movie) => movie.owner._id.toString() === req.user._id);
+
+    if (userMovies.length === 0) throw new NotFoundError(notFoundFilmes);
+
+    return res.json(userMovies);
   } catch (err) {
     return next(err);
   }

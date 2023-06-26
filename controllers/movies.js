@@ -10,7 +10,7 @@ const {
   incorrectIdFilm,
   movieDeletionError,
   succesDeleteFilm,
-} = require('../utils/config');
+} = require('../utils/constants');
 // ----------------------------------------------------
 const getMovies = async (req, res, next) => {
   try {

@@ -16,6 +16,13 @@ exports.signinValidation = celebrate({
   }),
 });
 
+exports.userUpdateValidation = celebrate({
+  body: Joi.object().keys({
+    name: Joi.string().min(2).max(30),
+    email: Joi.string().email(),
+  }),
+});
+
 exports.createMovieValidation = celebrate({
   body: Joi.object().keys({
     country: Joi.string().required(),

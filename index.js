@@ -1,4 +1,5 @@
 require('dotenv').config();
+const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
@@ -9,7 +10,7 @@ const helmet = require('helmet');
 const indexRoute = require('./routes/index');
 const handleErrors = require('./errors/handleErrors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const { limiterOptions, mongodbPath } = require('./utils/config');
+const { limiterOptions, mongodbPath, corsOptions } = require('./utils/config');
 
 const { PORT = 3500 } = process.env;
 const app = express();
@@ -18,6 +19,7 @@ app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
 });
 
+app.use(cors(corsOptions));
 app.use(helmet());
 app.use(rateLimit(limiterOptions));
 app.use(requestLogger);

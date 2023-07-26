@@ -34,32 +34,30 @@ const createMovie = async (req, res, next) => {
   try {
     const {
       country,
+      description,
       director,
       duration,
-      year,
-      description,
+      id,
       image,
-      trailerLink,
-      nameRU,
       nameEN,
-      thumbnail,
-      movieId,
+      nameRU,
+      trailerLink,
+      year,
     } = req.body;
 
     const owner = req.user._id;
 
     const movie = await Movie.create({
       country,
+      description,
       director,
       duration,
-      year,
-      description,
+      id,
       image,
-      trailerLink,
-      nameRU,
       nameEN,
-      thumbnail,
-      movieId,
+      nameRU,
+      trailerLink,
+      year,
       owner,
     });
 

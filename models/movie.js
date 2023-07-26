@@ -36,17 +36,12 @@ const movieSchema = new Schema({
     required: true,
     match: [checkURL],
   },
-  thumbnail: {
-    type: String,
-    required: true,
-    match: [checkURL],
-  },
   owner: {
     type: ObjectId,
     ref: 'user',
     required: true,
   },
-  movieId: {
+  id: {
     type: Number,
     required: true,
   },

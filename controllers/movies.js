@@ -5,7 +5,6 @@ const Forbidden = require('../errors/forbidden');
 const BadRequest = require('../errors/badRequest');
 const {
   createFilmError,
-  notFoundFilmes,
   notFoundFilm,
   incorrectIdFilm,
   movieDeletionError,
@@ -20,8 +19,6 @@ const getMovies = async (req, res, next) => {
 
     const userMovies = await allMovies
       .filter((movie) => movie.owner._id.toString() === req.user._id);
-
-    if (userMovies.length === 0) throw new NotFoundError(notFoundFilmes);
 
     return res.json(userMovies);
   } catch (err) {

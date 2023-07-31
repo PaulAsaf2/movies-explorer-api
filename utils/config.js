@@ -19,7 +19,7 @@ exports.mongodbPath = NODE_ENV === 'production'
   : 'mongodb://127.0.0.1:27017/bitfilmsdb';
 
 exports.corsOptions = {
-  origin: ['http://localhost:3000', 'https://diploma.nomoreparties.sbs'],
+  origin: ['http://localhost:3000', 'https://diploma.nomoreparties.sbs', 'https://api.nomoreparties.co/beatfilm-movies'],
   credentials: true,
   maxAge: 3600,
 };

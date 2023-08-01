@@ -53,7 +53,7 @@ const signin = async (req, res, next) => {
 
     token = await jwt.sign(
       { _id: existUser._id },
-      NODE_ENV === 'production' ? JWT_SECRET : developmentKey,
+      (NODE_ENV === 'production') ? JWT_SECRET : developmentKey,
       { expiresIn: '7d' },
     );
   } catch (err) { return next(err); }
@@ -72,12 +72,13 @@ const signout = (req, res) => {
     .send({ message: successfulExit });
 };
 // ----------------------------------------------------
-const getUser = async (req, res) => {
-  const user = await User
-    .findById(req.user._id)
-    .orFail(new NotFoundError(userNotFound));
-
-  res.send(user);
+const getUser = (req, res, next) => {
+  User.findById(req.params.id || req.user._id)
+    .then((user) => {
+      if (!user) { return next(new NotFoundError(userNotFound)); }
+      return res.send(user);
+    })
+    .catch(next);
 };
 // ----------------------------------------------------
 const updateUser = async (req, res, next) => {

@@ -6,18 +6,17 @@ const UnauthorizedError = require('../errors/unauthorized');
 const { developmentKey } = require('../utils/config');
 const { authorisationError } = require('../utils/constants');
 
-const auth = async (req, res, next) => {
+const auth = (req, res, next) => {
   let payload;
+  const token = req.cookies.jwt;
+
   try {
-    const token = await req.cookies.jwt;
-    console.log(token);
-    payload = await jwt.verify(token, JWT_SECRET || developmentKey);
-    console.log(payload);
-    req.user = payload;
+    payload = jwt.verify(token, (JWT_SECRET || developmentKey));
   } catch {
     return next(new UnauthorizedError(authorisationError));
   }
 
+  req.user = payload;
   return next();
 };
 
